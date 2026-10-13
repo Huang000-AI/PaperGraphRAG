@@ -1,10 +1,10 @@
 {
   "n_samples": 17,
   "scores": {
-    "faithfulness": 0.9003225784752729,
-    "answer_relevancy": 0.7986312783041439,
-    "context_precision": 0.8460639587161042,
-    "context_recall": 1.0
+    "faithfulness": 0.9471284271284272,
+    "answer_relevancy": 0.8287120405034052,
+    "context_precision": 0.8233461982080081,
+    "context_recall": 0.984375
   },
   "unanswerable": [
     {
