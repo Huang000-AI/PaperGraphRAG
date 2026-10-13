@@ -1,0 +1,29 @@
+{
+  "n_samples": 17,
+  "scores": {
+    "faithfulness": 0.7720657876904148,
+    "answer_relevancy": 0.7476071088339752,
+    "context_precision": 0.5855497181833533,
+    "context_recall": 0.8431372549019607
+  },
+  "unanswerable": [
+    {
+      "idx": 18,
+      "question": "GPT-4 的参数量是多少？请给出具体数字并说明依据。",
+      "answer_head": "根据提供的Context信息，我无法找到GPT-4的具体参数量。\n\n在Context中，我找到了关于GPT-3 175B的明确参数量信息：\n- GPT-3 175B被描述为\"a large pre-trained language model with approximately 175 billi",
+      "refused_guess": true
+    },
+    {
+      "idx": 19,
+      "question": "Mamba（状态空间模型）相比 Transformer 在核心机制上有什么不同？",
+      "answer_head": "# Mamba（状态空间模型）与Transformer的核心机制差异\n\nMamba（状态空间模型）与Transformer在核心机制上存在本质区别，主要体现在以下几个方面：\n\n## 1. 核心计算机制\n\n**Transformer**:\n- 主要依赖**自注意力机制**（Self-Attention",
+      "refused_guess": false
+    },
+    {
+      "idx": 20,
+      "question": "请解释生成对抗网络（GAN）中生成器与判别器的博弈训练机制，以及模式崩塌（mode collapse）产生的原因。",
+      "answer_head": "# 生成对抗网络（GAN）中的博弈训练机制与模式崩塌\n\n## 生成对抗网络的基本结构\n\n生成对抗网络（GAN）是一种深度学习架构，由两个相互竞争的神经网络组成：**生成器（Generator）**和**判别器（Discriminator）**。这种结构模拟了博弈论中的二人零和游戏，两个网络通过相互对",
+      "refused_guess": true
+    }
+  ]
+}

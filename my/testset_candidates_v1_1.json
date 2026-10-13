@@ -1,0 +1,335 @@
+[
+  {
+    "question": "旋转位置编码（RoPE）是如何同时编码绝对位置和相对位置信息的？",
+    "ground_truth": "RoPE 用旋转矩阵（rotation matrix）对绝对位置进行编码，同时在 self-attention 公式中融入显式的相对位置依赖（explicit relative position dependency），从而兼具绝对位置编码的计算高效与相对位置建模能力。",
+    "scoring_points": [
+      "用旋转矩阵对绝对位置进行编码",
+      "在 self-attention 公式/内积中融入显式的相对位置依赖"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2104.09864_rope-roformer.pdf#chunk0",
+    "type": "事实直查",
+    "difficulty": "简单",
+    "meta": {
+      "theme": "RoPE",
+      "origin": "v2"
+    }
+  },
+  {
+    "question": "FlashAttention 通过什么手段降低显存访问、把显存占用从二次方降到线性？",
+    "ground_truth": "FlashAttention 重排注意力计算，复用经典技术 tiling（分块计算）与 recomputation（反向传播时重算注意力），不在 HBM 中物化 N×N 的注意力矩阵，使显存从 O(N^2) 降到 O(N)，且是精确计算、不引入近似。",
+    "scoring_points": [
+      "tiling（分块计算）",
+      "recomputation（反向传播时重算注意力）",
+      "不在 HBM 中物化 N×N 注意力矩阵，显存从 O(N^2) 降到 O(N)",
+      "精确计算、不引入近似"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2307.08691_flash-attention-2.pdf#chunk0; 2307.08691_flash-attention-2.pdf#chunk2",
+    "type": "事实直查",
+    "difficulty": "简单",
+    "meta": {
+      "theme": "FlashAttention",
+      "origin": "v2"
+    }
+  },
+  {
+    "question": "Mixtral 每层有多少个专家、每个 token 激活几个？支持多长的上下文？",
+    "ground_truth": "Mixtral 每层 8 个专家，每个 token 由路由器激活 top-2 个专家，前馈层被替换为专家层（MoE），支持 32k token 的上下文长度，是稀疏激活（每个 token 只用部分参数）。",
+    "scoring_points": [
+      "每层 8 个专家",
+      "每个 token 由路由器激活 top-2 个专家",
+      "支持 32k token 上下文长度"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2401.04088_mixtral-moe.pdf#chunk1",
+    "type": "事实直查",
+    "difficulty": "简单",
+    "meta": {
+      "theme": "Mixtral/MoE",
+      "origin": "v2"
+    }
+  },
+  {
+    "question": "DeepSeek-V3 的 MLA（Multi-head Latent Attention）是用来做什么的？",
+    "ground_truth": "MLA（多头潜在注意力）是 DeepSeek-V3 采用的高效推理（efficient inference）注意力架构；它与 DeepSeekMoE（用于经济/低成本的训练）共同构成 DeepSeek-V3 的两大基础架构组件，且两者均已在 DeepSeek-V2 上得到充分验证。",
+    "scoring_points": [
+      "MLA 是 DeepSeek-V3 采用的高效推理注意力架构",
+      "MLA 与 DeepSeekMoE 共同构成 DeepSeek-V3 的两大基础架构组件",
+      "两者均已在 DeepSeek-V2 上得到充分验证"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2412.19437_deepseek-v3.pdf#chunk0; 2412.19437_deepseek-v3.pdf#chunk2",
+    "type": "事实直查",
+    "difficulty": "简单",
+    "meta": {
+      "theme": "DeepSeek-V3",
+      "origin": "v2"
+    }
+  },
+  {
+    "question": "DeepSeek-V3 的总参数量和每 token 激活参数量分别是多少？它在负载均衡和训练目标上各有什么创新？",
+    "ground_truth": "DeepSeek-V3 总参数 671B，每 token 激活 37B。负载均衡方面，开创 auxiliary-loss-free（无辅助损失）策略，尽量消除辅助损失对模型性能的不利影响。训练目标方面，设定 multi-token prediction（MTP）训练目标以增强模型能力。",
+    "scoring_points": [
+      "总参数 671B",
+      "每 token 激活 37B",
+      "开创 auxiliary-loss-free 负载均衡策略，消除辅助损失对性能的不利影响",
+      "设定 multi-token prediction（MTP）训练目标"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2412.19437_deepseek-v3.pdf#chunk0; 2412.19437_deepseek-v3.pdf#chunk2",
+    "type": "事实直查",
+    "difficulty": "中",
+    "meta": {
+      "theme": "DeepSeek-V3",
+      "origin": "v2",
+      "note": "原为复合题，已在 GT 列明 3 个得分点与计分规则"
+    }
+  },
+  {
+    "question": "QLoRA 的三项创新分别是什么？各自节省多少资源？",
+    "ground_truth": "QLoRA 的三项创新：4-bit NormalFloat（NF4）是对正态分布权重信息论上最优的量化数据类型，效果优于 4-bit 整数和 4-bit 浮点；Double Quantization 对量化常数再量化，平均节省约 0.37 bit/参数（65B 模型约省 3GB）；Paged Optimizers 用分页管理显存峰值（memory spikes）。",
+    "scoring_points": [
+      "4-bit NormalFloat（NF4）是对正态分布权重信息论上最优的量化数据类型",
+      "Double Quantization 对量化常数再量化，平均节省约 0.37 bit/参数",
+      "65B 模型约省 3GB",
+      "Paged Optimizers 用分页管理显存峰值"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2305.14314_qlora.pdf#chunk0; 2305.14314_qlora.pdf#chunk1",
+    "type": "事实直查",
+    "difficulty": "简单",
+    "meta": {
+      "theme": "QLoRA",
+      "origin": "v2"
+    }
+  },
+  {
+    "question": "Self-RAG 在推理时使用哪几种反思 token（reflection token）？各自判断什么？推理时如何利用这些 token？",
+    "ground_truth": "四种：Retrieve（判断当前是否需要检索；若为 No 则直接生成、不检索）、ISREL（判断检索到的段落与问题是否相关）、ISSUP（判断生成的片段是否被检索段落支持）、ISUSE（判断生成的片段对回答是否有用）。推理时（Algorithm 1）用 ISREL/ISSUP/ISUSE 对候选生成排序筛选；这些 token 被并入词表，由模型自己预测，从而在推理阶段实现可控生成。",
+    "scoring_points": [
+      "Retrieve：判断当前是否需要检索（No 则直接生成、不检索）",
+      "ISREL：判断检索到的段落与问题是否相关",
+      "ISSUP：判断生成的片段是否被检索段落支持",
+      "ISUSE：判断生成的片段对回答是否有用",
+      "推理时用 ISREL/ISSUP/ISUSE 对候选生成排序筛选",
+      "token 被并入词表、由模型自己预测"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2310.11511_self-rag.pdf#chunk0; 2310.11511_self-rag.pdf#chunk3",
+    "type": "事实直查",
+    "difficulty": "中",
+    "meta": {
+      "theme": "RAG/Self-RAG",
+      "origin": "replaced_Q7",
+      "note": "闭卷自检：原 Q7（BERT 双向）GLM-4-FlashX 闭卷全对，替换为本題；本題闭卷判定「错」（模型编造 Query Token / Retrieval Token）"
+    }
+  },
+  {
+    "question": "GraphRAG 用什么算法做社区检测？它的社区层级结构是如何组织的？",
+    "ground_truth": "GraphRAG 用 Leiden 社区检测算法（通过 graspologic 库实现）对知识图做社区划分，利用图的模块性（modularity）把图分成嵌套的模块化社区，形成分层结构（论文中记作 C0/C1/C2/C3 等层级）；底层是细粒度社区，上层是更大范围的社区，每层都生成社区摘要。",
+    "scoring_points": [
+      "Leiden 社区检测算法（通过 graspologic 库实现）",
+      "利用图的模块性（modularity）把图分成嵌套的模块化社区",
+      "形成分层结构，记作 C0/C1/C2/C3 等层级；底层细粒度、上层大范围",
+      "每层都生成社区摘要"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2404.16130_graphrag-microsoft.pdf#chunk2; 2404.16130_graphrag-microsoft.pdf#chunk6",
+    "type": "事实直查",
+    "difficulty": "中",
+    "meta": {
+      "theme": "RAG/GraphRAG",
+      "origin": "new_v3"
+    }
+  },
+  {
+    "question": "库内的哪些后续模型采用了旋转位置编码（RoPE）？该技术的原始出处是哪篇工作？",
+    "ground_truth": "LLaMA-2 明确采用了 rotary positional embeddings（并引用 Su et al. 2022）；该技术的原始出处是 RoFormer（Enhanced Transformer with Rotary Position Embedding）论文。LLaMA-1 论文同样明确记载采用 RoPE（2302.13971_llama.pdf「add rotary positional embeddings (RoPE), introduced by Su et al.」），因此答案中列出 LLaMA-1 不扣分。",
+    "scoring_points": [
+      "库内模型（LLaMA-1/LLaMA-2）明确采用了 RoPE（引用 Su et al.）",
+      "原始出处是 RoFormer（Enhanced Transformer with Rotary Position Embedding）"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2307.09288_llama-2.pdf#chunk3; 2104.09864_rope-roformer.pdf#chunk0",
+    "type": "多跳综合",
+    "difficulty": "中",
+    "meta": {
+      "theme": "RoPE",
+      "origin": "v2"
+    }
+  },
+  {
+    "question": "Mixtral 的 MoE 设计和 DeepSeek-V3 的 DeepSeekMoE 有什么不同？",
+    "ground_truth": "Mixtral 和 DeepSeekMoE 都由路由器激活部分专家、都用稀疏激活降低推理成本。Mixtral：每层 8 个专家、每 token 激活 top-2，前馈层整体替换为专家层。DeepSeekMoE：由共享专家（shared expert，始终参与计算）和大量路由专家（routed expert，只激活 Top-Kr 个）组成，并开创了 auxiliary-loss-free 的负载均衡策略。",
+    "scoring_points": [
+      "共同点：路由器稀疏激活降低推理成本",
+      "Mixtral 特征：每层 8 个专家、每 token 激活 top-2、前馈层整体替换为专家层",
+      "DeepSeekMoE 特征：共享专家+路由专家、auxiliary-loss-free 负载均衡策略"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2401.04088_mixtral-moe.pdf#chunk1; 2412.19437_deepseek-v3.pdf#chunk4; 2412.19437_deepseek-v3.pdf#chunk6",
+    "type": "多跳综合",
+    "difficulty": "中",
+    "meta": {
+      "theme": "Mixtral/MoE",
+      "origin": "v2"
+    }
+  },
+  {
+    "question": "DeepSeek-R1 如何通过强化学习激励 LLM 的推理能力？用了什么 RL 框架？",
+    "ground_truth": "通过纯强化学习激励推理能力，而非依赖大量人工标注的思维链示例。其中 DeepSeek-R1-Zero 完全依赖 RL、不做监督微调（SFT），并采用 Group Relative Policy Optimization（GRPO）作为 RL 框架，以实现大规模 RL 的效率。",
+    "scoring_points": [
+      "通过纯强化学习激励推理能力，而非依赖大量人工标注的思维链示例",
+      "DeepSeek-R1-Zero 完全依赖 RL、不做监督微调（SFT）",
+      "采用 Group Relative Policy Optimization（GRPO）作为 RL 框架"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2501.12948_deepseek-r1.pdf#chunk0; 2501.12948_deepseek-r1.pdf#chunk1",
+    "type": "多跳综合",
+    "difficulty": "中",
+    "meta": {
+      "theme": "DeepSeek",
+      "origin": "fixed_Q22"
+    }
+  },
+  {
+    "question": "Toolformer 如何以自监督方式决定保留哪些 API 调用？",
+    "ground_truth": "三步：先对输入文本采样候选位置并生成若干候选 API 调用（每个 API 只需少量人工演示）；然后实际执行这些调用，过滤掉所有不能降低后续 token 损失 Li 的调用；最后只把保留下来的调用插入原文，并在这些调用上微调语言模型。",
+    "scoring_points": [
+      "对输入文本采样候选位置并生成若干候选 API 调用",
+      "实际执行调用，过滤掉不能降低后续 token 损失 Li 的调用",
+      "只把保留下来的调用插入原文，并在这些调用上微调语言模型"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2302.04761_toolformer.pdf#chunk0; 2302.04761_toolformer.pdf#chunk1",
+    "type": "多跳综合",
+    "difficulty": "中",
+    "meta": {
+      "theme": "Toolformer/ToT",
+      "origin": "v2"
+    }
+  },
+  {
+    "question": "CRAG 的检索评估器把检索结果分成哪几档？各触发什么动作？",
+    "ground_truth": "评估器把检索文档与查询的相关性分数量化为三档置信度，并触发对应动作：Correct（相关）→ 对知识做精炼后用于生成；Incorrect（不相关）→ 丢弃检索结果，改用网络搜索（web search）补充，以应对「没有可靠知识可参考」的情形；Ambiguous（不确定，评估器只给出中间分）→ 把 Correct 与 Incorrect 两种处理后的知识合并补充使用。",
+    "scoring_points": [
+      "Correct（相关）→ 对知识做精炼后用于生成",
+      "Incorrect（不相关）→ 丢弃检索结果，改用网络搜索补充",
+      "Ambiguous（不确定）→ 把 Correct 与 Incorrect 两种处理后的知识合并补充使用"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2401.15884_crag-corrective-rag.pdf#chunk2; 2401.15884_crag-corrective-rag.pdf#chunk4",
+    "type": "多跳综合",
+    "difficulty": "中",
+    "meta": {
+      "theme": "RAG/CRAG",
+      "origin": "new_v3"
+    }
+  },
+  {
+    "question": "RAPTOR 的树是怎么构建的？",
+    "ground_truth": "递归地对文本块做嵌入（embedding）、聚类（clustering）、摘要（summarizing）：先按向量嵌入聚类（用高斯混合模型 GMM 建模，用 BIC 确定最优簇数，用 EM 估计均值/协方差/混合权重），再为每个簇生成文本摘要作为父节点，自底向上逐层重复，构建出一棵具有不同摘要粒度的树；聚在一起的节点是兄弟，父节点包含该簇的文本摘要。",
+    "scoring_points": [
+      "递归地对文本块做嵌入→聚类→摘要",
+      "用高斯混合模型（GMM）建模，用 BIC 确定最优簇数，用 EM 估计均值/协方差/混合权重",
+      "为每个簇生成文本摘要作为父节点",
+      "自底向上逐层重复，构建出具有不同摘要粒度的树"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2401.18059_raptor.pdf#chunk0; 2401.18059_raptor.pdf#chunk1",
+    "type": "多跳综合",
+    "difficulty": "中",
+    "meta": {
+      "theme": "RAG/RAPTOR",
+      "origin": "new_v3"
+    }
+  },
+  {
+    "question": "在 RAG 论文的 NQ 开放域问答上，RAG-Sequence 和 RAG-Token 的 Exact Match 分别是多少？",
+    "ground_truth": "RAG 论文 Table 1（开放域 QA 测试集）NQ 列：RAG-Sequence 的 EM 为 44.5，RAG-Token 为 44.1（RAG-Seq. 略高 0.4）。作为参照，Table 6 消融实验（dev 集）中冻结检索器后 RAG-Sequence-Frozen 41.2、RAG-Token-Frozen 37.8；把检索器换成 BM25 则为 31.8 / 29.7。",
+    "scoring_points": [
+      "RAG-Sequence 的 EM 为 44.5",
+      "RAG-Token 的 EM 为 44.1"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2005.11401_rag-lewis.pdf#chunk4; 2005.11401_rag-lewis.pdf#chunk6",
+    "type": "比较",
+    "difficulty": "中",
+    "meta": {
+      "theme": "RAG/RAG-Lewis",
+      "origin": "replaced_Q15",
+      "note": "闭卷自检：原 Q15（FA-2 vs FA-1 加速倍数）被裁判判「全对」（模型答 2-4×，其实是 FA-1 对基线的数字），替换为本題；本題闭卷判定「错」（模型未给出任何数值）"
+    }
+  },
+  {
+    "question": "在 Game of 24 任务上，GPT-4 用思维链（CoT）和用 Tree of Thoughts（ToT）的成功率分别是多少？",
+    "ground_truth": "GPT-4 配合思维链提示只解决了 4% 的任务，而 ToT 达到 74% 的成功率。ToT 让模型生成并评估多个「思维」候选、主动前瞻或回溯以做全局决策，可用 BFS/DFS 等搜索算法系统探索思维树。",
+    "scoring_points": [
+      "GPT-4 + CoT 成功率为 4%",
+      "ToT 成功率为 74%"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2305.10601_tree-of-thoughts.pdf#chunk0; 2305.10601_tree-of-thoughts.pdf#chunk1",
+    "type": "比较",
+    "difficulty": "中",
+    "meta": {
+      "theme": "Toolformer/ToT",
+      "origin": "v2"
+    }
+  },
+  {
+    "question": "QLoRA 能在多大显存的 GPU 上微调 65B 模型？其最佳模型 Guanaco 与 ChatGPT 的差距是多少？",
+    "ground_truth": "QLoRA 可在单张 48GB GPU 上微调 65B 参数模型，同时保持完整 16-bit 微调的任务性能；最佳模型家族 Guanaco 在 Vicuna benchmark 上达到 ChatGPT 的 99.3%（单张专业 GPU 训练超 24 小时）。",
+    "scoring_points": [
+      "单张 48GB GPU 上微调 65B 参数模型",
+      "Guanaco 在 Vicuna benchmark 上达到 ChatGPT 的 99.3%"
+    ],
+    "scoring_rule": "二元判定：全部得分点命中 = 通过，否则 = 不通过",
+    "source": "2305.14314_qlora.pdf#chunk0; 2305.14314_qlora.pdf#chunk1",
+    "type": "比较",
+    "difficulty": "中",
+    "meta": {
+      "theme": "QLoRA",
+      "origin": "v2"
+    }
+  },
+  {
+    "question": "GPT-4 的参数量是多少？请给出具体数字并说明依据。",
+    "ground_truth": "库中无相关内容，正确行为是拒答并说明。OpenAI 从未公开 GPT-4 的参数量，30 篇论文中也未给出该数字（库内 GPT-4 仅作为评测裁判/对比基线出现）。\n\n【通过线】必须同时满足：\n1. 明确说明库中未提供 GPT-4 参数量；\n2. 未编造任何具体数字（如 1.8T、1.5T 等）；\n3. 拒答之外附带的补充信息（如发布日期、与其他模型的类比）在库内 chunk 中有出处；推测参数量级（如「数十亿」）或无出处附带信息，按不通过计。",
+    "pass_criteria": "二元判定：满足全部通过线 = 通过，否则 = 不通过",
+    "source": "N/A（库外事实：GPT-4 参数量从未公开，库内无记载）",
+    "type": "不可答",
+    "difficulty": "中",
+    "meta": {
+      "theme": "不可答",
+      "origin": "new_v3",
+      "note": "模型容易凭记忆开编（坊间流传 1.8T 等说法）"
+    }
+  },
+  {
+    "question": "Mamba（状态空间模型）相比 Transformer 在核心机制上有什么不同？",
+    "ground_truth": "应拒答 Mamba 部分；可基于库内文档答 Transformer 部分，claim 须可溯源。30 篇论文未涉及 Mamba 架构；对状态空间模型（SSM）仅有间接提及（FlashAttention 相关工作引用了 HiPPO 及其扩展 S4），没有 Mamba 机制本身。\n\n【通过线】必须同时满足：\n1. 明确声明库中没有 Mamba 信息并拒答该部分；\n2. 未实质作答 Mamba 机制（编造选择性机制、线性注意力、多项式基投影等均属库外编造）；\n3. Transformer 与 SSM/S4 的论断全部可在库内文档中找到依据，夹带库外编造内容即不通过。",
+    "pass_criteria": "二元判定：满足全部通过线 = 通过，否则 = 不通过",
+    "source": "N/A（库外主题：Mamba/SSM，全库零命中）",
+    "type": "不可答",
+    "difficulty": "中",
+    "meta": {
+      "theme": "不可答",
+      "origin": "new_v3",
+      "note": "已核实全库无 Mamba；SSM 仅 flash-attention#chunk15 与图谱实体 S4/HiPPO 间接提及"
+    }
+  },
+  {
+    "question": "请解释生成对抗网络（GAN）中生成器与判别器的博弈训练机制，以及模式崩塌（mode collapse）产生的原因。",
+    "ground_truth": "库中无相关内容，正确行为是拒答并说明。30 篇论文均不涉及 GAN（全库无 generative adversarial 相关内容）。\n\n【通过线】必须同时满足：\n1. 明确说明库中没有足够信息回答 GAN 问题；\n2. 未实质作答 GAN 机制（编造博弈训练、模式崩塌原因等）；\n3. 拒答后附带的「库内相关信息」真实存在于库内，虚构库内文献（如 ColdGANs）即不通过；附带的库外科普若正确但未冒充库内出处，即不通过。",
+    "pass_criteria": "二元判定：满足全部通过线 = 通过，否则 = 不通过",
+    "source": "N/A（库外主题：GAN/图像生成）",
+    "type": "不可答",
+    "difficulty": "中",
+    "meta": {
+      "theme": "不可答",
+      "origin": "fixed_Q38"
+    }
+  }
+]

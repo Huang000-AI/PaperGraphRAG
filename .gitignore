@@ -1,0 +1,19 @@
+# 真实密钥（只提交 .env.example）
+.env
+
+# 日志
+*.log
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+
+# 虚拟环境
+.venv/
+venv/
+
+# LightRAG 运行时生成的知识库 / 向量库目录（体积大、可重建）
+rag_eval_papers*/
+
+# 语料 PDF（用 download_corpus.py 按需下载）
+my/corpus-ai-papers/

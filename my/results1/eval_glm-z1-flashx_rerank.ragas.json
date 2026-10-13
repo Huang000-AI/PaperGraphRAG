@@ -1,0 +1,29 @@
+{
+  "n_samples": 17,
+  "scores": {
+    "faithfulness": 0.8930535060330524,
+    "answer_relevancy": 0.8434501589664245,
+    "context_precision": 0.8125195353788804,
+    "context_recall": 0.9264705882352942
+  },
+  "unanswerable": [
+    {
+      "idx": 18,
+      "question": "GPT-4 的参数量是多少？请给出具体数字并说明依据。",
+      "answer_head": "根据提供的知识图谱和文档片段，我无法找到关于GPT-4具体参数量的信息。\n\n在知识图谱中，我找到了关于GPT-4的描述：\n- GPT-4是OpenAI开发的一个专有、闭源的大型语言模型，在2023年发布的GPT-4技术报告中有所记载\n- 它是性能最强的商业模型之一，作为评估其他语言模型（包括开源替代",
+      "refused_guess": true
+    },
+    {
+      "idx": 19,
+      "question": "Mamba（状态空间模型）相比 Transformer 在核心机制上有什么不同？",
+      "answer_head": "Mamba（状态空间模型）与Transformer在核心机制上有几个关键区别：\n\n### 1. 计算复杂度与序列处理\n- **Transformer**：使用自注意力机制，计算复杂度为O(N²)，其中N是序列长度。这使得处理长序列时计算成本很高。\n- **状态空间模型**：具有线性复杂度O(N)，通",
+      "refused_guess": false
+    },
+    {
+      "idx": 20,
+      "question": "请解释生成对抗网络（GAN）中生成器与判别器的博弈训练机制，以及模式崩塌（mode collapse）产生的原因。",
+      "answer_head": "在提供的上下文信息中，我没有找到关于生成对抗网络（GAN）及其生成器与判别器博弈训练机制的相关内容。上下文主要涵盖了其他主题，如：\n\n- LoRA（低秩适应）方法\n- RAG（检索增强生成）系统\n- DeepSeek-R1模型\n- 链式思考（Chain of Thought）推理\n- Instruc",
+      "refused_guess": false
+    }
+  ]
+}

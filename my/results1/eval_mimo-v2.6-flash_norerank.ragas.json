@@ -1,0 +1,29 @@
+{
+  "n_samples": 17,
+  "scores": {
+    "faithfulness": 0.9257711010696835,
+    "answer_relevancy": 0.8413032496724748,
+    "context_precision": 0.6297466964461775,
+    "context_recall": 0.9705882352941176
+  },
+  "unanswerable": [
+    {
+      "idx": 18,
+      "question": "GPT-4 的参数量是多少？请给出具体数字并说明依据。",
+      "answer_head": "根据所提供的 **Context**（包括知识图谱数据和文档片段），其中没有给出 GPT-4 的具体参数量数字。\n\n上下文中关于 GPT-4 的信息包括：\n\n- **模型性质**：GPT-4 是 OpenAI 开发的专有、闭源大语言模型，相关文档为 2023 年发布的《GPT-4 Technical",
+      "refused_guess": true
+    },
+    {
+      "idx": 19,
+      "question": "Mamba（状态空间模型）相比 Transformer 在核心机制上有什么不同？",
+      "answer_head": "## 关于您的问题\n\n需要先说明：**提供的知识库中没有关于 Mamba 模型本身的直接信息**——上下文里既未出现 \"Mamba\" 这一实体，也没有介绍其选择性机制（selective mechanism）等具体设计。因此，我无法就\"Mamba 相比 Transformer 的具体差异\"给出确切结",
+      "refused_guess": true
+    },
+    {
+      "idx": 20,
+      "question": "请解释生成对抗网络（GAN）中生成器与判别器的博弈训练机制，以及模式崩塌（mode collapse）产生的原因。",
+      "answer_head": "**关于您的问题，我无法提供准确的解答。**\n\n我仔细检索了所提供的知识库（包括知识图谱数据与全部文档片段），其中**没有任何关于生成对抗网络（GAN）、生成器与判别器博弈训练机制、或 GAN 中模式崩塌（mode collapse）成因的内容**。该知识库覆盖的主题主要集中在以下方面：\n\n- 检索",
+      "refused_guess": true
+    }
+  ]
+}

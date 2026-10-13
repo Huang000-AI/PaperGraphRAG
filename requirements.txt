@@ -1,0 +1,23 @@
+# PaperGraphRAG 依赖清单（版本为作者实测环境固定版本）
+# 版本号取自作者实测环境：python -m pip show <pkg>
+
+# 图谱增强 RAG 框架核心（本项目基于它构建）；[api] extra 提供 FastAPI 服务端，供 my/serve_webui.py 使用
+lightrag-hku[api]==1.5.8
+
+# 解析论文 PDF 文本（my/insert_eval_papers.py）
+pypdf==6.16.2
+
+# OpenAI 兼容客户端：调用 MiMo / GLM / 硅基流动的 chat / embeddings 端点
+openai==2.54.0
+
+# 异步 HTTP 客户端：调用硅基流动 /rerank
+httpx==0.28.1
+
+# 向量运算（embedding 输出为 numpy 数组）
+numpy==2.4.6
+
+# RAGAS 四维指标评测（my/eval_ragas.py）
+ragas==0.4.3
+
+# RAGAS 的 LLM / Embedding 裁判以 LangChain 接口接入（my/ragas_config.py）
+langchain-openai==0.3.35

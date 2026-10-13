@@ -1,0 +1,29 @@
+{
+  "n_samples": 17,
+  "scores": {
+    "faithfulness": 0.9003225784752729,
+    "answer_relevancy": 0.7986312783041439,
+    "context_precision": 0.8460639587161042,
+    "context_recall": 1.0
+  },
+  "unanswerable": [
+    {
+      "idx": 18,
+      "question": "GPT-4 的参数量是多少？请给出具体数字并说明依据。",
+      "answer_head": "## 回答\n\n**在本次提供的上下文中，无法给出 GPT-4 参数量的具体数字。**\n\n### 依据说明\n\n我仔细检索了提供的 **知识图谱数据（Knowledge Graph Data）** 与 **文档块（Document Chunks）**，结果如下：\n\n- **知识图谱中关于 GPT-4 的",
+      "refused_guess": true
+    },
+    {
+      "idx": 19,
+      "question": "Mamba（状态空间模型）相比 Transformer 在核心机制上有什么不同？",
+      "answer_head": "## 关于 Mamba 的说明\n\n首先需要指出，在我所掌握的知识库中，**没有关于 Mamba 模型本身的直接信息**——上下文并未提及 Mamba 的具体设计（如选择性状态空间机制、硬件感知并行扫描等）。不过，知识库中包含了**状态空间模型（State-Space Models）** 与 **Tr",
+      "refused_guess": true
+    },
+    {
+      "idx": 20,
+      "question": "请解释生成对抗网络（GAN）中生成器与判别器的博弈训练机制，以及模式崩塌（mode collapse）产生的原因。",
+      "answer_head": "## 关于您的问题\n\n**很抱歉，提供的知识库中并没有关于生成对抗网络（GAN）中生成器与判别器博弈训练机制的原理性描述，也无法找到关于 GAN 模式崩塌（mode collapse）成因的系统解释。** 因此，我无法依据现有上下文完整回答这一问题。\n\n不过，知识库中包含了一些与该主题**间接相关*",
+      "refused_guess": true
+    }
+  ]
+}

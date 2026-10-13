@@ -1,0 +1,121 @@
+[
+  {
+    "question": "旋转位置编码（RoPE）是如何同时编码绝对位置和相对位置信息的？",
+    "faithfulness": 0.0,
+    "answer_relevancy": 0.30689445470648785,
+    "context_precision": 0.9761904761742063,
+    "context_recall": 1.0
+  },
+  {
+    "question": "FlashAttention 通过什么手段降低显存访问、把显存占用从二次方降到线性？",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.8736458686398768,
+    "context_precision": 0.9797979797870932,
+    "context_recall": 1.0
+  },
+  {
+    "question": "Mixtral 每层有多少个专家、每个 token 激活几个？支持多长的上下文？",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.7128881366955416,
+    "context_precision": 0.99999999995,
+    "context_recall": 1.0
+  },
+  {
+    "question": "DeepSeek-V3 的 MLA（Multi-head Latent Attention）是用来做什么的？",
+    "faithfulness": 0.8333333333333334,
+    "answer_relevancy": 0.9731131599858472,
+    "context_precision": 0.9249999999815,
+    "context_recall": 1.0
+  },
+  {
+    "question": "DeepSeek-V3 的总参数量和每 token 激活参数量分别是多少？它在负载均衡和训练目标上各有什么创新？",
+    "faithfulness": NaN,
+    "answer_relevancy": 0.8316989032123007,
+    "context_precision": 0.8123376623260575,
+    "context_recall": 1.0
+  },
+  {
+    "question": "QLoRA 的三项创新分别是什么？各自节省多少资源？",
+    "faithfulness": 0.9411764705882353,
+    "answer_relevancy": 0.8900979866515811,
+    "context_precision": 0.99999999998,
+    "context_recall": 1.0
+  },
+  {
+    "question": "Self-RAG 在推理时使用哪几种反思 token（reflection token）？各自判断什么？推理时如何利用这些 token？",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.8129023039113568,
+    "context_precision": 0.8686948853518998,
+    "context_recall": 1.0
+  },
+  {
+    "question": "GraphRAG 用什么算法做社区检测？它的社区层级结构是如何组织的？",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.8440133610537744,
+    "context_precision": 0.6079365079243492,
+    "context_recall": 1.0
+  },
+  {
+    "question": "库内的哪些后续模型采用了旋转位置编码（RoPE）？该技术的原始出处是哪篇工作？",
+    "faithfulness": 0.9130434782608695,
+    "answer_relevancy": 0.7125488833661606,
+    "context_precision": 0.6829365079251257,
+    "context_recall": 1.0
+  },
+  {
+    "question": "Mixtral 的 MoE 设计和 DeepSeek-V3 的 DeepSeekMoE 有什么不同？",
+    "faithfulness": 0.8604651162790697,
+    "answer_relevancy": 0.8888181310773516,
+    "context_precision": 0.40965909089884944,
+    "context_recall": 1.0
+  },
+  {
+    "question": "DeepSeek-R1 如何通过强化学习激励 LLM 的推理能力？用了什么 RL 框架？",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.833650877991249,
+    "context_precision": 0.8874999999778125,
+    "context_recall": 1.0
+  },
+  {
+    "question": "Toolformer 如何以自监督方式决定保留哪些 API 调用？",
+    "faithfulness": 0.8571428571428571,
+    "answer_relevancy": 0.7949973187483899,
+    "context_precision": 0.9028571428390857,
+    "context_recall": 1.0
+  },
+  {
+    "question": "CRAG 的检索评估器把检索结果分成哪几档？各触发什么动作？",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.7625591690017742,
+    "context_precision": 0.874542124529631,
+    "context_recall": 1.0
+  },
+  {
+    "question": "RAPTOR 的树是怎么构建的？",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.9070935280056277,
+    "context_precision": 0.6361111110952083,
+    "context_recall": 1.0
+  },
+  {
+    "question": "在 RAG 论文的 NQ 开放域问答上，RAG-Sequence 和 RAG-Token 的 Exact Match 分别是多少？",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.804254923507771,
+    "context_precision": 0.99999999995,
+    "context_recall": 1.0
+  },
+  {
+    "question": "在 Game of 24 任务上，GPT-4 用思维链（CoT）和用 Tree of Thoughts（ToT）的成功率分别是多少？",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.7410321958410152,
+    "context_precision": 0.8928571428348213,
+    "context_recall": 1.0
+  },
+  {
+    "question": "QLoRA 能在多大显存的 GPU 上微调 65B 模型？其最佳模型 Guanaco 与 ChatGPT 的差距是多少？",
+    "faithfulness": 1.0,
+    "answer_relevancy": 0.8865225287743431,
+    "context_precision": 0.9266666666481332,
+    "context_recall": 1.0
+  }
+]
