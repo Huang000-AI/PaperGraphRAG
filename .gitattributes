@@ -1,0 +1,2 @@
+# 统一按 LF 检出/提交，避免 Windows(CRLF) 与其它平台之间的换行噪声 diff
+* text=auto eol=lf

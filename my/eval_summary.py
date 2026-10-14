@@ -8,7 +8,7 @@
 口径：通过 = 二元判定（全部得分点命中 / 全部通过线满足）
 输出两个核心指标：
   - 完整通过率（pass rate）：通过题数 / 总题数
-  - 平均得分点命中率（hit rate）：仅可答题，Σ(hit/total) / 可答题数
+  - 得分点命中率（hit rate）：仅可答题，Σ命中得分点 / Σ总得分点（micro，与 README 表格口径一致）
 """
 
 import json
@@ -23,15 +23,6 @@ if "--outdir" in sys.argv:
 
 def verdict_of(rec: dict) -> str:
     return (rec.get("judge") or {}).get("verdict", "未判")
-
-
-def hit_rate(rec: dict) -> float | None:
-    """可答题的得分点命中率；不可答题返回 None（不参与计算）。"""
-    j = rec.get("judge") or {}
-    if j.get("hit_points") is not None and j.get("total_points"):
-        total = j["total_points"]
-        return j["hit_points"] / total if total > 0 else None
-    return None
 
 
 def main():
@@ -53,11 +44,11 @@ def main():
         # 幻觉否决题数（可答题中「点全中但因幻觉被毙」+ 不可答幻觉由通过线兜住）
         n_hallu_veto = counts.get("不通过（幻觉否决）", 0)
 
-        # 平均得分点命中率（仅可答题）
+        # 得分点命中率（仅可答题）：Σ命中 / Σ总得分点（micro，与 README 表格口径一致）
         answerable = [r for r in recs if r.get("type") != "不可答"]
-        hit_rates = [hit_rate(r) for r in answerable]
-        hit_rates = [r for r in hit_rates if r is not None]
-        avg_hit = sum(hit_rates) / len(hit_rates) if hit_rates else 0.0
+        hit_sum = sum((r.get("judge") or {}).get("hit_points", 0) for r in answerable)
+        total_sum = sum((r.get("judge") or {}).get("total_points", 0) for r in answerable)
+        avg_hit = hit_sum / total_sum if total_sum else 0.0
 
         # 不可答题通过率
         unanswerable = [r for r in recs if r.get("type") == "不可答"]
