@@ -3,6 +3,8 @@
 > 基于 LightRAG，面向 30 篇 AI 经典论文（Transformer / BERT / RAG / LoRA / RoPE / CoT 等）构建的图谱增强 RAG 问答系统。
 > 项目重点不只是"搭起来"，而是建立了一套**可复现的评估闭环**：测试集设计 → LLM-as-Judge 逐点核对 + RAGAS 双轨评估 → 消融调优。
 
+![WebUI 问答界面：mix 模式回答 Toolformer 问题，附论文引用](docs/images/webui-chat.png)
+
 ## 特性
 
 - **图谱增强检索**：基于 LightRAG，实体/关系抽取 + 知识图谱构建，支持 naive / local / global / hybrid / mix 五种检索模式
@@ -37,6 +39,10 @@ flowchart LR
         T[20 题评测集] --> Q
     end
 ```
+
+入库产出的知识图谱局部（WebUI 可视化，节点含方法 / 模型 / 作者 / 数据集等实体类型）：
+
+![知识图谱局部：ReAct、BERT、CoT-SC 等实体及其关系](docs/images/knowledge-graph.png)
 
 ## 安装 / 依赖
 
@@ -120,6 +126,10 @@ reranker 为 bge-reranker-v2-m3。用**两款推理型 LLM（glm-z1-flashx / mim
 | mimo-v2.6-flash | ✗ | 98.1% | 85% | 2 | 0.926 | 0.630 | 0.971 |
 | mimo-v2.6-flash | ✓ | **100.0%** | 85% | 2 | 0.947 | **0.823 (+19.3pp)** | **0.984** |
 
+`eval_summary.py` 的实际输出（与上表口径一致）：
+
+![eval_summary 汇总输出：四组实验的通过率 / 得分点命中率 / 幻觉否决](docs/images/eval-results.png)
+
 三个结论：
 
 1. **rerank 的检索侧增益第三次稳定复现**：context_precision +19.3~22.7pp，mimo 下 context_recall 达 0.984。
@@ -152,6 +162,8 @@ PaperGraphRAG/
 ├── .gitignore
 ├── requirements.txt        # 固定版本的依赖清单
 ├── download_corpus.py      # 按 arXiv ID 下载 30 篇论文 PDF 到 my/corpus-ai-papers/
+├── docs/
+│   └── images/             # README 截图（WebUI 问答 / 知识图谱 / 评测输出）
 └── my/                     # 作者产出的评测代码与数据（脚本内用 ./my/... 相对仓库根的路径）
     ├── serve_webui.py          # 一键启动 FastAPI Server + WebUI（读 my/.env，内置 rerank 适配）
     ├── insert_eval_papers.py   # 批量论文入库（chunk 尺寸 / 并发 / gleaning 可配）
