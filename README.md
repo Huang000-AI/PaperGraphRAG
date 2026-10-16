@@ -3,7 +3,7 @@
 > 基于 LightRAG，面向 30 篇 AI 经典论文（Transformer / BERT / RAG / LoRA / RoPE / CoT 等）构建的图谱增强 RAG 问答系统。
 > 项目重点不只是"搭起来"，而是建立了一套**可复现的评估闭环**：测试集设计 → LLM-as-Judge 逐点核对 + RAGAS 双轨评估 → 消融调优。
 
-![WebUI 问答界面：mix 模式回答 Toolformer 问题，附论文引用](docs/images/webui-chat.png)
+![WebUI 问答界面：mix 模式回答 Toolformer 问题，附论文引用](https://testingcf.jsdelivr.net/gh/Huang000-AI/PaperGraphRAG@main/docs/images/webui-chat.png)
 
 ## 特性
 
@@ -42,7 +42,7 @@ flowchart LR
 
 入库产出的知识图谱局部（WebUI 可视化，节点含方法 / 模型 / 作者 / 数据集等实体类型）：
 
-![知识图谱局部：ReAct、BERT、CoT-SC 等实体及其关系](docs/images/knowledge-graph.png)
+![知识图谱局部：ReAct、BERT、CoT-SC 等实体及其关系](https://testingcf.jsdelivr.net/gh/Huang000-AI/PaperGraphRAG@main/docs/images/knowledge-graph.png)
 
 ## 安装 / 依赖
 
@@ -128,7 +128,7 @@ reranker 为 bge-reranker-v2-m3。用**两款推理型 LLM（glm-z1-flashx / mim
 
 `eval_summary.py` 的实际输出（与上表口径一致）：
 
-![eval_summary 汇总输出：四组实验的通过率 / 得分点命中率 / 幻觉否决](docs/images/eval-results.png)
+![eval_summary 汇总输出：四组实验的通过率 / 得分点命中率 / 幻觉否决](https://testingcf.jsdelivr.net/gh/Huang000-AI/PaperGraphRAG@main/docs/images/eval-results.png)
 
 三个结论：
 
